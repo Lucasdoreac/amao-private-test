@@ -1,7 +1,7 @@
 {
-  "name": "amao-local-media-search",
+  "name": "amao-reddit-client",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": { "start": "node server.mjs" },
   "engines": { "node": ">=20" }

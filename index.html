@@ -1,52 +1,114 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer"><meta name="color-scheme" content="dark">
-  <title>À mão — busca local</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="dark">
+  <title>À mão — local</title>
   <style>
     :root{color-scheme:dark;--bg:#0b0d10;--panel:#13171c;--line:#252b32;--muted:#a1a9b2;--text:#f3f5f7;--accent:#b8f36b}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    main{width:min(1120px,100%);margin:auto;padding:24px 20px 64px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px}.brand{color:var(--accent);font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:750}.privacy,.muted{color:var(--muted);font-size:12px}
+    main{width:min(1120px,100%);margin:auto;padding:24px 20px 64px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;gap:12px}.brand{color:var(--accent);font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:750}.muted{color:var(--muted);font-size:12px}
     h1{font-size:clamp(30px,6vw,50px);letter-spacing:-.045em;line-height:1.02;margin:0 0 12px}.lede{color:var(--muted);margin:0 0 22px;max-width:700px}
-    form{display:flex;gap:10px;margin-bottom:10px}input[type=search],input[type=url],input[type=text]{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:13px 14px;font:inherit}button,.button{border:0;border-radius:10px;background:var(--accent);color:#11150b;font-weight:700;padding:0 18px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button:disabled{opacity:.5;cursor:wait}.secondary{background:#242b32;color:var(--text);border:1px solid var(--line);padding:8px 12px;min-height:36px;font-size:13px}
-    .bar,.options{display:flex;flex-wrap:wrap;gap:12px;align-items:center;color:var(--muted);font-size:13px;margin:12px 0}.options label{display:flex;align-items:center;gap:6px}select{color:var(--text);background:var(--panel);border:1px solid var(--line);padding:7px 10px;border-radius:8px}
-    .status{min-height:25px;color:var(--muted);font-size:13px;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:15px}article{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.preview{width:100%;aspect-ratio:16/9;background:#070809;position:relative;display:grid;place-items:center}.preview img,.preview video{width:100%;height:100%;object-fit:cover;display:block}.play{position:absolute;background:#000b;color:white;border:1px solid #ffffff44;width:48px;height:48px;min-height:48px;border-radius:50%;padding:0;font-size:19px}.details{padding:12px 13px 14px}.title{font-weight:650;font-size:14px;line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.meta,.links{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;margin-top:8px}.links{justify-content:flex-start;gap:14px}.source{color:var(--accent)}a{color:#c7d2df;text-decoration:none}a:hover{text-decoration:underline}.player{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}.sentinel{height:64px;display:grid;place-items:center;color:var(--muted);font-size:13px}.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin:20px 0}.box h2{font-size:15px;margin:0 0 5px}.box p{color:var(--muted);font-size:12px;margin:5px 0 10px}.box form{margin:0}.notice{border-top:1px solid var(--line);margin-top:30px;padding-top:15px;color:#89919a;font-size:11px;line-height:1.55}.tag{background:#20262d;color:#cbd2d9;border-radius:99px;padding:3px 8px;font-size:11px}
+    form{display:flex;gap:10px;margin-bottom:10px}input[type=search]{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:13px 14px;font:inherit}button,.button{border:0;border-radius:10px;background:var(--accent);color:#11150b;font-weight:700;padding:0 18px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}button:disabled{opacity:.5;cursor:wait}.secondary{background:#242b32;color:var(--text);border:1px solid var(--line);padding:8px 12px;min-height:36px;font-size:13px}
+    .bar,.options{display:flex;flex-wrap:wrap;gap:12px;align-items:center;color:var(--muted);font-size:13px;margin:12px 0}.options label{display:flex;align-items:center;gap:6px}.options select{color:var(--text);background:var(--panel);border:1px solid var(--line);padding:7px 10px;border-radius:8px}
+    .status{min-height:25px;color:var(--muted);font-size:13px;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:15px}article{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.preview{width:100%;aspect-ratio:16/9;background:#070809;position:relative;display:grid;place-items:center}.preview img,.preview video{width:100%;height:100%;object-fit:cover;display:block}.play{position:absolute;background:#000b;color:white;border:1px solid #ffffff44;width:48px;height:48px;min-height:48px;border-radius:50%;padding:0;font-size:19px}.details{padding:12px 13px 14px}.title{font-weight:650;font-size:14px;line-height:1.35;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.meta,.links{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;margin-top:8px}.links{justify-content:flex-start;gap:14px;flex-wrap:wrap}.source{color:var(--accent)}a{color:#c7d2df;text-decoration:none}a:hover{text-decoration:underline}.player{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}.sentinel{height:64px;display:grid;place-items:center;color:var(--muted);font-size:13px}.tag{background:#20262d;color:#cbd2d9;border-radius:99px;padding:3px 8px;font-size:11px}.notice{border-top:1px solid var(--line);margin-top:30px;padding-top:15px;color:#89919a;font-size:11px;line-height:1.55}
     @media(max-width:560px){main{padding:19px 13px 48px}form{flex-direction:column}form button{min-height:46px}.grid{grid-template-columns:1fr}header{align-items:flex-start}}
   </style>
 </head>
 <body><main>
-  <header><div class="brand">À mão · local</div><div id="auth" class="bar"><span class="privacy">sem histórico persistido</span></div></header>
-  <h1>Busca cruzada.<br>Player limpo.</h1>
-  <p class="lede">Consulta Eporner e Reddit no mesmo feed. A busca fica na memória desta aba. Fontes externas ainda recebem seu IP; o Reddit só entra depois do OAuth.</p>
-  <form id="searchForm"><input id="query" type="search" placeholder="Sua busca (não vai para o chat)" autocomplete="off" autocapitalize="off" spellcheck="false" required><button id="searchButton">Buscar</button></form>
-  <div class="options"><label>Ordenar <select id="order"><option value="latest">mais recentes</option><option value="top-weekly">mais vistos na semana (Eporner)</option><option value="most-popular">mais populares (Eporner)</option></select></label><label><input id="longOnly" type="checkbox"> vídeos longos (10 min+, quando a fonte informa duração)</label><label><input id="adultConfirm" type="checkbox"> 18+ · confirmo ser adulto e buscar conteúdo legal com adultos</label></div>
-  <div class="status" id="status" aria-live="polite">Digite um termo e clique em Buscar. OAuth do Reddit é opcional.</div>
-  <section class="grid" id="results" aria-label="Resultados"></section><div class="sentinel" id="sentinel"></div>
-  <section class="box"><h2>Reproduzir um magnet que você já tem</h2><p>O app não procura trackers nem baixa arquivos por conta própria. Cole um magnet de mídia legal/autorizada; ele será passado ao cliente de torrent instalado no Mac (por exemplo, Stremio ou outro que registre o protocolo magnet).</p><form id="magnetForm"><input id="magnet" type="text" placeholder="magnet:?xt=urn:btih:…" autocomplete="off" spellcheck="false"><button class="secondary">Abrir no cliente</button></form></section>
-  <p class="notice">Privacidade: nenhum termo é salvo em localStorage, banco ou URL; fechar a aba apaga o estado local. Eporner recebe consulta e IP. Reddit recebe consulta/IP na API OAuth e pode associar a busca à sua conta. Vídeos nativos iniciam mutados; iframes externos podem impor seus próprios controles. Resultados e direitos dependem de cada fonte. A página não contorna paywalls nem acessos privados.</p>
+  <header><div class="brand">À mão · local</div><div id="auth" class="bar"><span class="muted">sessão local</span></div></header>
+  <h1>Consulta local.</h1>
+  <p class="lede">Conecte-se ao Reddit e defina os parâmetros da consulta. O estado da página fica nesta aba.</p>
+  <form id="searchForm"><input id="query" type="search" placeholder="Termo de busca" autocomplete="off" autocapitalize="off" spellcheck="false" required><button id="searchButton">Buscar</button></form>
+  <div class="options">
+    <label>Ordenar <select id="order"><option value="relevance">relevância</option><option value="new">mais recentes</option></select></label>
+    <label><input id="accountRules" type="checkbox"> Confirmo ter idade exigida pela minha conta e seguir as regras do Reddit</label>
+  </div>
+  <div class="status" id="status" aria-live="polite">Conecte sua conta para continuar.</div>
+  <section class="grid" id="results" aria-label="Resultados"></section>
+  <div class="sentinel" id="sentinel"></div>
+  <p class="notice">A sessão OAuth é mantida pelo processo local. A API do Reddit recebe as consultas; fechar ou reiniciar o servidor encerra a sessão em memória. A reprodução de vídeos depende dos dados e permissões fornecidos pelo Reddit.</p>
 </main>
 <script>
-(()=>{
-  const $=s=>document.querySelector(s), input=$('#query'), results=$('#results'), status=$('#status'), sentinel=$('#sentinel'), button=$('#searchButton');
-  let query='', generation=0, active=false, pages={eporner:1,reddit:null}, loading=false, seen=new Set();
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const date=s=>{if(!s)return '';const d=new Date(s);return Number.isNaN(+d)?'':d.toLocaleDateString('pt-BR')};
-  const dur=n=>{n=Number(n)||0;const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=Math.floor(n%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${m}:${String(s).padStart(2,'0')}`};
-  const allowedUrl=s=>{try{const u=new URL(s);return ['https:'].includes(u.protocol)?u.href:''}catch{return ''}};
-  function addCard(v){if(seen.has(v.id))return;seen.add(v.id);if($('#longOnly').checked&&v.duration&&v.duration<600)return;
-    const article=document.createElement('article'), url=allowedUrl(v.url), media=allowedUrl(v.media), thumb=allowedUrl(v.thumb), id='pv-'+Math.random().toString(36).slice(2);
-    article.innerHTML=`<div class="preview" id="${id}">${thumb?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(thumb)}" alt="Prévia">`:''}<button class="play" type="button" aria-label="Reproduzir">▶</button></div><div class="details"><div class="title">${esc(v.title||'Sem título')}</div><div class="meta"><span>${v.duration?dur(v.duration):''}</span><span>${date(v.date)}</span></div><div class="links"><span class="source">${esc(v.source)}</span>${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">fonte ↗</a>`:''}<span class="tag">${v.kind==='native'?'vídeo':'incorporado'}</span>${v.over18?'<span class="tag">18+</span>':''}</div></div>`;
-    article.querySelector('.play').addEventListener('click',()=>{const preview=article.querySelector('.preview');if(v.kind==='native'&&media){const video=document.createElement('video');video.className='player';video.src=media;video.controls=true;video.playsInline=true;video.muted=true;video.preload='none';preview.replaceWith(video);video.play().catch(()=>{});}else if(media){const frame=document.createElement('iframe');frame.className='player';frame.src=media;frame.title='Player da fonte';frame.loading='lazy';frame.referrerPolicy='no-referrer';frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;preview.replaceWith(frame);}else if(url)window.open(url,'_blank','noopener,noreferrer');},{once:true});results.append(article);
+(()=> {
+  const $=selector=>document.querySelector(selector);
+  const input=$('#query'), results=$('#results'), status=$('#status'), sentinel=$('#sentinel'), button=$('#searchButton');
+  let query='', generation=0, after=null, loading=false, seen=new Set();
+  const safeUrl=value=>{try{const url=new URL(value);return url.protocol==='https:'?url.href:''}catch{return ''}};
+  const formatDate=value=>{const date=new Date(value);return Number.isNaN(+date)?'':date.toLocaleDateString('pt-BR')};
+  function addCard(item) {
+    if(seen.has(item.id))return;
+    seen.add(item.id);
+    const article=document.createElement('article'), media=safeUrl(item.media), thumb=safeUrl(item.thumb), url=safeUrl(item.url);
+    const preview=document.createElement('div');preview.className='preview';
+    if(thumb){const image=document.createElement('img');image.loading='lazy';image.referrerPolicy='no-referrer';image.src=thumb;image.alt='Prévia';preview.append(image);}
+    if(media){
+      const play=document.createElement('button');play.className='play';play.type='button';play.setAttribute('aria-label','Reproduzir');play.textContent='▶';
+      play.addEventListener('click',()=>{const video=document.createElement('video');video.className='player';video.src=media;video.controls=true;video.playsInline=true;video.muted=true;video.preload='none';preview.replaceWith(video);video.play().catch(()=>{});},{once:true});
+      preview.append(play);
+    }
+    const details=document.createElement('div');details.className='details';
+    const title=document.createElement('div');title.className='title';title.textContent=item.title||'Sem título';
+    const meta=document.createElement('div');meta.className='meta';meta.textContent=[item.community,formatDate(item.date)].filter(Boolean).join(' · ');
+    const links=document.createElement('div');links.className='links';
+    const source=document.createElement('span');source.className='source';source.textContent='Reddit';links.append(source);
+    if(item.restricted){const tag=document.createElement('span');tag.className='tag';tag.textContent='Sensível';links.append(tag);}
+    if(url){const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Abrir no Reddit ↗';links.append(link);}
+    details.append(title,meta,links);article.append(preview,details);results.append(article);
   }
-  async function getEporner(page,run){const p=new URLSearchParams({query,per_page:'24',page:String(page),order:$('#order').value,format:'json',gay:'2'});const r=await fetch('/api/eporner?'+p);if(!r.ok)throw Error('Eporner: '+r.status);const d=await r.json();if(run!==generation)return;for(const x of d.videos||[])addCard({id:'ep:'+x.id,title:x.title,url:x.url,media:x.embed,thumb:x.default_thumb?.src,duration:x.length_sec,date:x.added,source:'Eporner',kind:'embed'});return {more:page<(Number(d.total_pages)||1),count:(d.videos||[]).length};}
-  async function getReddit(run,after){const p=new URLSearchParams({q:query,limit:'50',sort:$('#order').value==='latest'?'new':'relevance'});if(after)p.set('after',after);const r=await fetch('/api/reddit/search?'+p);if(r.status===401)throw Error('Reddit desconectado. Clique em “Conectar Reddit” acima.');if(!r.ok)throw Error('Reddit: '+r.status);const d=await r.json();if(run!==generation)return {more:false};for(const x of d.items||[])addCard({...x,source:'Reddit'});return {more:!!d.after,after:d.after,count:(d.items||[]).length};}
-  async function firstPage(run){loading=true;button.disabled=true;status.textContent='Buscando nas fontes…';const jobs=[getEporner(1,run),getReddit(run,null)];const settled=await Promise.allSettled(jobs);if(run===generation){const errs=settled.filter(x=>x.status==='rejected').map(x=>x.reason.message);const n=results.children.length;status.textContent=`${n} resultados`+(errs.length?` · ${errs.join(' · ')}`:'');pages.eporner=settled[0]?.status==='fulfilled'&&settled[0].value.more?2:null;pages.reddit=settled[1]?.status==='fulfilled'&&settled[1].value.more?settled[1].value.after:null;active=pages.eporner!==null||pages.reddit!==null;sentinel.textContent=active?'Role para carregar mais':'Fim dos resultados.';}loading=false;button.disabled=false;}
-  async function more(){if(!query||loading||!active)return;loading=true;sentinel.textContent='Carregando…';const run=generation;const jobs=[];if(pages.eporner)jobs.push(getEporner(pages.eporner,run).then(x=>({s:'e',...x})));if(pages.reddit!==null)jobs.push(getReddit(run,pages.reddit).then(x=>({s:'r',...x})));if(!jobs.length){active=false;sentinel.textContent='Fim dos resultados.';loading=false;return;}const out=await Promise.allSettled(jobs);if(run===generation){for(const x of out){if(x.status==='fulfilled'){if(x.value.s==='e')pages.eporner=x.value.more?pages.eporner+1:null;else pages.reddit=x.value.more?x.value.after:null;}else{if(String(x.reason).includes('Reddit'))pages.reddit=null;else pages.eporner=null;}}active=pages.eporner!==null||pages.reddit!==null;sentinel.textContent=active?'Role para carregar mais':'Fim dos resultados.';status.textContent=`${results.children.length} resultados`; }loading=false;}
-  $('#searchForm').addEventListener('submit',e=>{e.preventDefault();if(!$('#adultConfirm').checked){status.textContent='Confirme 18+ para iniciar a busca.';return;}query=input.value.trim();if(!query)return;generation++;seen.clear();results.replaceChildren();pages={eporner:1,reddit:null};active=true;firstPage(generation);});
-  $('#order').addEventListener('change',()=>{if(query)$('#searchForm').requestSubmit();});$('#longOnly').addEventListener('change',()=>{if(query)$('#searchForm').requestSubmit();});
-  new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting))more();},{rootMargin:'700px'}).observe(sentinel);
-  $('#magnetForm').addEventListener('submit',e=>{e.preventDefault();const m=$('#magnet').value.trim();if(!m.startsWith('magnet:?xt=urn:btih:')||m.length>4096){status.textContent='Magnet inválido ou longo demais.';return;}location.href=m;});
-  fetch('/api/status').then(r=>r.json()).then(s=>{const auth=$('#auth');auth.innerHTML=s.reddit?'<span class="tag">Reddit conectado</span><button class="secondary" id="logout">Desconectar</button>':'<a class="button secondary" href="/auth/reddit">Conectar Reddit</a><span class="privacy">opcional</span>';$('#logout')?.addEventListener('click',async()=>{await fetch('/auth/logout',{method:'POST'});location.reload();});}).catch(()=>{$('#auth').textContent='servidor local offline';});
+  async function loadPage(run, cursor) {
+    const params=new URLSearchParams({q:query,sort:$('#order').value});
+    if(cursor)params.set('after',cursor);
+    const response=await fetch('/api/reddit/search?'+params);
+    if(response.status===401)throw Error('Reddit desconectado. Conecte a conta para buscar.');
+    if(!response.ok)throw Error('Reddit indisponível: HTTP '+response.status);
+    const data=await response.json();
+    if(run!==generation)return null;
+    for(const item of data.items||[])addCard(item);
+    return data.after||null;
+  }
+  async function search() {
+    if(loading||!query)return;
+    loading=true;button.disabled=true;status.textContent='Consultando o Reddit…';sentinel.textContent='';
+    const run=generation;
+    try {
+      after=await loadPage(run,null);
+      if(run===generation){status.textContent=results.children.length+' resultado(s)';sentinel.textContent=after?'Role para carregar mais':'Fim dos resultados.';}
+    } catch(error) {if(run===generation)status.textContent=error.message;}
+    finally {loading=false;button.disabled=false;}
+  }
+  async function loadMore() {
+    if(loading||!after||!query)return;
+    loading=true;sentinel.textContent='Carregando…';const run=generation;
+    try {
+      after=await loadPage(run,after);
+      if(run===generation){status.textContent=results.children.length+' resultado(s)';sentinel.textContent=after?'Role para carregar mais':'Fim dos resultados.';}
+    } catch(error) {if(run===generation){after=null;status.textContent=error.message;sentinel.textContent='';}}
+    finally {loading=false;}
+  }
+  $('#searchForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!$('#accountRules').checked){status.textContent='Confirme os requisitos da conta antes de consultar.';return;}
+    query=input.value.trim();if(!query)return;
+    generation++;after=null;seen.clear();results.replaceChildren();search();
+  });
+  $('#order').addEventListener('change',()=>{if(query)$('#searchForm').requestSubmit();});
+  new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting))loadMore();},{rootMargin:'700px'}).observe(sentinel);
+  fetch('/api/status').then(response=>response.json()).then(state=>{
+    const auth=$('#auth');
+    if(state.reddit){
+      const label=document.createElement('span');label.className='tag';label.textContent='Reddit conectado';
+      const logout=document.createElement('button');logout.className='secondary';logout.id='logout';logout.type='button';logout.textContent='Desconectar';
+      logout.addEventListener('click',async()=>{await fetch('/auth/logout',{method:'POST'});location.reload();});
+      auth.replaceChildren(label,logout);status.textContent='Conta conectada. Digite um termo para consultar.';
+    }else{
+      const link=document.createElement('a');link.className='button secondary';link.href='/auth/reddit';link.textContent='Conectar Reddit';
+      auth.replaceChildren(link);status.textContent='Conecte sua conta para continuar.';
+    }
+  }).catch(()=>{status.textContent='Servidor local indisponível.';});
 })();
-</script></body></html>
+</script>
+</body>
+</html>
